@@ -1,38 +1,306 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Spotify-specific styles */
 .App {
-    text-align: center;
+  height: 100vh;
+  background-color: #000000;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+::-webkit-scrollbar-track {
+  background: #181818;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+::-webkit-scrollbar-thumb {
+  background: #535353;
+  border-radius: 4px;
 }
 
-.App-link {
-    color: #61dafb;
+::-webkit-scrollbar-thumb:hover {
+  background: #727272;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Hover effects for cards */
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+.group:hover .group-hover\:bg-gray-700 {
+  background-color: #374151;
+}
+
+/* Text truncation utilities */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Transitions and animations */
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Focus styles */
+button:focus,
+input:focus {
+  outline: none;
+}
+
+/* Responsive design helpers */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    width: 60px;
+  }
+  
+  .sidebar .menu-text {
+    display: none;
+  }
+}
+
+/* Green accent color matching Spotify */
+.bg-spotify-green {
+  background-color: #1DB954;
+}
+
+.text-spotify-green {
+  color: #1DB954;
+}
+
+.border-spotify-green {
+  border-color: #1DB954;
+}
+
+/* Dark theme colors */
+.bg-spotify-black {
+  background-color: #121212;
+}
+
+.bg-spotify-dark-gray {
+  background-color: #181818;
+}
+
+.bg-spotify-gray {
+  background-color: #282828;
+}
+
+/* Player specific styles */
+.player-controls svg {
+  transition: transform 0.1s ease;
+}
+
+.player-controls button:hover svg {
+  transform: scale(1.1);
+}
+
+/* Progress bar styles */
+.progress-bar {
+  position: relative;
+  background-color: #535353;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #1DB954;
+  transition: width 0.3s ease;
+}
+
+/* Album/playlist card hover effects */
+.album-card {
+  transition: background-color 0.3s ease;
+}
+
+.album-card:hover {
+  background-color: #282828;
+}
+
+.album-card .play-button {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.album-card:hover .play-button {
+  opacity: 1;
+}
+
+/* Search input styles */
+.search-input {
+  background-color: #242424;
+  border: none;
+  color: #ffffff;
+  padding: 12px 40px 12px 12px;
+  border-radius: 24px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-input::placeholder {
+  color: #a7a7a7;
+}
+
+.search-input:focus {
+  outline: none;
+  background-color: #2a2a2a;
+}
+
+/* Category cards in search */
+.category-card {
+  position: relative;
+  overflow: hidden;
+  height: 120px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-card img {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  transform: rotate(25deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Library view styles */
+.library-item {
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.library-item:hover {
+  background-color: #282828;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1024px) {
+  .grid-cols-5 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-cols-4 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Loading states */
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom button styles */
+.btn-primary {
+  background-color: #1DB954;
+  color: #000000;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #1ed760;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 24px;
+  border: 1px solid #535353;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: #ffffff;
+  transform: translateY(-1px);
 }
